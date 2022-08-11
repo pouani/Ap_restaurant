@@ -22,22 +22,23 @@ Route::post('register', [RegisterController::class,'register'])->name('register'
 Route::post('login', [RegisterController::class,'login'])->name('login');
 
 
-Route::middleware('auth:api')->get('/index', [CategorieController::class,'index']);
-Route::middleware('auth:api')->post('/store', [CategorieController::class,'store']);
-Route::middleware('auth:api')->get('/show/{id}', [CategorieController::class,'show']);
-Route::middleware('auth:api')->put('/update/{categorie}', [CategorieController::class,'update']);
+Route::middleware('auth:api')->get('/categories', [CategorieController::class,'index']);
+Route::middleware('auth:api')->post('/categories', [CategorieController::class,'store']);
+Route::middleware('auth:api')->get('/categories/{id}', [CategorieController::class,'show']);
+Route::middleware('auth:api')->delete('/categories/{id}', [CategorieController::class,'destroy']);
+Route::middleware('auth:api')->put('/categories/{categorie}', [CategorieController::class,'update']);
 
 //route restaurant
-Route::get('/index', [RestaurantController::class,'index']);
+Route::get('/restaurants', [RestaurantController::class,'index']);
 Route::middleware('auth:api')->post('/create', [ProductController::class,'create']);
 
 //route produit
-Route::get('/list', [ProductController::class,'list']);
+Route::get('/produits', [ProductController::class,'index']);
 
 // Route::Apiresource('restaurant', 'RestaurantController');
 
 
-Route::apiResource('/categories','CategorieController');
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::apiResource('/categories','CategorieController');
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

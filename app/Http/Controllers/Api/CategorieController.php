@@ -18,12 +18,23 @@ class CategorieController extends Controller
    
     public function index()
     {
-        
-       $categories = Categorie::all();
+        try {
+            $categories = Categorie::all();
+            return response()->json([
+                'success' =>true,
+                'message' => $categories
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ], 500);
+        }
+    //    $categories = Categorie::all();
 
-       return response()->json([
-        'Categories' => $categories,
-       ]);
+    //    return response()->json([
+    //     'Categorie' => $categories,
+    //    ]);
     }
 
     /**

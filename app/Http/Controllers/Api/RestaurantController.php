@@ -13,7 +13,7 @@ class RestaurantController extends Controller
     
     public function index()
     {
-        $restaurant = Restaurant::all();
+        $restaurant = Restaurant::where('active', 1)->get();
 
        return response()->json([
         'Categories' => $restaurant,

@@ -15,13 +15,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function list()
+    public function index()
     {
         try {
-            $products = Product::isRandomOrder()
-            ->whereActive(true)
-            ->take(16)
-            ->get();
+            $products = Product::get();
 
             return response()->json([
                 'success' =>true,
