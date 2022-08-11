@@ -38,7 +38,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -57,7 +57,7 @@ class ProductController extends Controller
             $product->description = $request->get('description');
             $product->price = $request->get('price');
             $product->active = $request->get('active');
-            $product->image = $request->get('image');
+            $product->image = addMedia($pathToFile)->toMediaCollection('images');
             $product->categorie_id = $request->get('categorie_id');
             $product->save();
 
@@ -80,9 +80,21 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        try {
+            $product = Product::find($id);
+
+            return response()->json([
+                'success' =>true,
+                'message' => $product
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -103,8 +115,19 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        try {
+            Product::where('id', $id)->delete();
+            return response()->json([
+                'success' =>true,
+                'message' => 'Produit Supprimé!!!'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ], 500);
+        }
     }
 }

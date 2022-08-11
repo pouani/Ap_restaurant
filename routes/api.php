@@ -17,11 +17,13 @@ use App\Http\Controllers\Api\RestaurantController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// 
+//route authentification et listing des users
 Route::post('register', [RegisterController::class,'register'])->name('register');
 Route::post('login', [RegisterController::class,'login'])->name('login');
+Route::get('users', [RegisterController::class,'index']);
 
 
+//routes categories
 Route::middleware('auth:api')->get('/categories', [CategorieController::class,'index']);
 Route::middleware('auth:api')->post('/categories', [CategorieController::class,'store']);
 Route::middleware('auth:api')->get('/categories/{id}', [CategorieController::class,'show']);
@@ -36,7 +38,7 @@ Route::middleware('auth:api')->delete('/restaurants/{id}', [RestaurantController
 Route::middleware('auth:api')->put('/restaurants/{restaurant}', [RestaurantController::class,'update']);
 
 
-//route produit
+//routes produits
 Route::get('/produits', [ProductController::class,'index']);
 
 // Route::Apiresource('restaurant', 'RestaurantController');

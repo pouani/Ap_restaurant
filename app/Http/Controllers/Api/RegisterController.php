@@ -52,4 +52,11 @@ class RegisterController extends Controller
             ]); 
         } 
     }
+    public function index(){
+        $categories = User::all();
+
+       return response()->json([
+        'Categorie' => $categories,
+       ]);
+    }
 }
