@@ -30,7 +30,11 @@ Route::middleware('auth:api')->put('/categories/{categorie}', [CategorieControll
 
 //route restaurant
 Route::get('/restaurants', [RestaurantController::class,'index']);
-Route::middleware('auth:api')->post('/create', [ProductController::class,'create']);
+Route::middleware('auth:api')->post('/restaurants', [RestaurantController::class,'store']);
+Route::get('/restaurants/{id}', [RestaurantController::class,'show']);
+Route::middleware('auth:api')->delete('/restaurants/{id}', [RestaurantController::class,'destroy']);
+Route::middleware('auth:api')->put('/restaurants/{restaurant}', [RestaurantController::class,'update']);
+
 
 //route produit
 Route::get('/produits', [ProductController::class,'index']);

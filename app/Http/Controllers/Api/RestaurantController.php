@@ -67,9 +67,21 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function show(Restaurant $restaurant)
+    public function show($id)
     {
-        //
+        try {
+            $restaurant = Restaurant::find($id);
+
+            return response()->json([
+                'success' =>true,
+                'message' => $restaurant
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ], 500);
+        }
     }
 
     /**
@@ -81,7 +93,52 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
-        //
+        // try {
+        //     $validator = Validator::make($request->all(), [
+        //         'id' => 'required|integer',
+        //         'name' => 'required|string|max:300',
+        //         'adresse' => 'string',
+        //         'menu' => 'required|string',
+        //         'image' => 'required|string',
+        //         'active' => 'boolean'
+        //     ]);
+            
+        //     if($validator->fails()){
+        //         return response()->json([
+        //             "success" => false,
+        //             "message" => $validator->errors()
+        //         ]);
+        //     }
+
+        //     $restaurant = Restaurant::find($request->get('id'));
+        //     $restaurant->name = $request->get('name');
+        //     $restaurant->adresse = $request->get('adresse');
+        //     $restaurant->menu = $request->get('menu');
+        //     $restaurant->note = $request->get('note');
+        //     $restaurant->cost = $request->get('cost');
+        //     $restaurant->save();
+
+        //     return response()->json([
+        //         'success' =>true,
+        //         'message' => 'Produit modifié!!!'
+        //     ], 200);
+
+        // } catch (Exception $ex) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => $ex->getMessage(),
+        //     ], 500);
+        // }
+
+        if($restaurant->update($request->all())){
+            return response()->json([
+                'success' => 'Modification effectuee !!!'
+            ], 200);
+       }
+            return response()->json([
+                'success' => false,
+                'message' => 'Echec Modification',
+            ], 500);
     }
 
     /**
@@ -90,8 +147,19 @@ class RestaurantController extends Controller
      * @param  \App\Models\Restaurant  $restaurant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy($id)
     {
-        //
+        try {
+            Restaurant::where('id', $id)->delete();
+            return response()->json([
+                'success' =>true,
+                'message' => 'Restaurant Supprimé!!!'
+            ], 200);
+        } catch (Exception $ex) {
+            return response()->json([
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ], 500);
+        }
     }
 }
