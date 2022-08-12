@@ -21,12 +21,13 @@ use App\Http\Controllers\Api\RestaurantController;
 Route::post('register', [RegisterController::class,'register'])->name('register');
 Route::post('login', [RegisterController::class,'login'])->name('login');
 Route::get('users', [RegisterController::class,'index']);
+Route::middleware('auth:api', [RegisterController::class,'destroy']);
 
 
 //routes categories
-Route::middleware('auth:api')->get('/categories', [CategorieController::class,'index']);
+Route::get('/categories', [CategorieController::class,'index']);
 Route::middleware('auth:api')->post('/categories', [CategorieController::class,'store']);
-Route::middleware('auth:api')->get('/categories/{id}', [CategorieController::class,'show']);
+Route::get('/categories/{id}', [CategorieController::class,'show']);
 Route::middleware('auth:api')->delete('/categories/{id}', [CategorieController::class,'destroy']);
 Route::middleware('auth:api')->put('/categories/{categorie}', [CategorieController::class,'update']);
 

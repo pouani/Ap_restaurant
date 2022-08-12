@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -58,5 +59,20 @@ class RegisterController extends Controller
        return response()->json([
         'Categorie' => $categories,
        ]);
+    }
+
+    public function destroy($id){
+        try {
+            User::where('id', $id)->delete();
+            response()->json([
+                'message' => 'Suppression réussie',
+            ]);
+        }
+        catch(Exception $ex){
+            return response()->json([
+                'sucess' => true,
+                'message' => $ex->getMessage(),
+            ]);
+        }
     }
 }
