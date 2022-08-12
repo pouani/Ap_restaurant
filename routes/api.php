@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\CategorieController;
@@ -41,6 +42,14 @@ Route::middleware('auth:api')->put('/restaurants/{restaurant}', [RestaurantContr
 
 //routes produits
 Route::get('/produits', [ProductController::class,'index']);
+Route::middleware('auth:api')->post('/produits', [ProductController::class,'store']);
+
+//routes carts
+Route::get('/carts', [CartController::class,'index']);
+Route::post('/carts', [CartController::class,'store']);
+Route::get('/carts/increase/{id}', [CartController::class,'increase']);
+Route::get('/carts/decrease/{id}', [CartController::class,'decrease']);
+Route::delete('/carts/{id}', [CartController::class,'destroy']);
 
 // Route::Apiresource('restaurant', 'RestaurantController');
 
