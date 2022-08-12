@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\RestaurantController;
 Route::post('register', [RegisterController::class,'register'])->name('register');
 Route::post('login', [RegisterController::class,'login'])->name('login');
 Route::get('users', [RegisterController::class,'index']);
-Route::middleware('auth:api', [RegisterController::class,'destroy']);
+Route::middleware('auth:api')->delete('/users/{id}', [RegisterController::class,'destroy']);
 
 
 //routes categories
