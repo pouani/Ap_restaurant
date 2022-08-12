@@ -23,7 +23,7 @@ class RegisterController extends Controller
         if($validator->fails()){
             return response()->json([
                 'message' => 'mauvais',
-            ]);       
+            ],500);       
         }
    
         $input = $request->all();
@@ -35,7 +35,7 @@ class RegisterController extends Controller
         return response()->json([
             'success' => true,
             'mesaage' => 'User register successfully.',
-        ]);
+        ],200);
     }
    
     public function login(Request $request)
@@ -49,14 +49,14 @@ class RegisterController extends Controller
         else{ 
             return response()->json([
                 'message' => 'Connexion échoué',
-            ]); 
+            ],500); 
         } 
     }
     public function index(){
-        $categories = User::all();
+        $users = User::all();
 
        return response()->json([
-        'Categorie' => $categories,
+        'Categorie' => $users,
        ]);
     }
 }
