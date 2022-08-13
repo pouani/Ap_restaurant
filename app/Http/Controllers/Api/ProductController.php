@@ -52,7 +52,13 @@ class ProductController extends Controller
                 ]);
             }
 
-            $product = Product::create(['name' => $request->name, 'price' => $request->price, 'active' => $request->active, 'categorie_id' => $request->categorie_id]);
+            $product = Product::create([
+                'name' => $request->name, 
+                'price' => $request->price, 
+                'active' => $request->active, 
+                'categorie_id' => $request->categorie_id
+            ]);
+            
             $product->addMedia($request->images)->toMediaCollection('images');
             $product = $product->fresh();
 

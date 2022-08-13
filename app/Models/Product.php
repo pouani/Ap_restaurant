@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Models\Categorie;
+use App\Models\Restaurant;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends Model implements HasMedia
 {
@@ -20,6 +21,11 @@ class Product extends Model implements HasMedia
     public function categories()
     {
         return $this->belongsTo(Categorie::class);
+    }
+
+    public function restaurants()
+    {
+        return $this->belongsTo(Restaurant::class);
     }
 
     public function orders(): BelongsToMany

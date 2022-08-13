@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Restaurant extends Model
 {
     use HasFactory, SoftDeletes;
+
+    //fonction relation one to many(ici une actegorie peut detenir plusieurs produits)
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
