@@ -15,7 +15,7 @@ class Product extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    protected $fillable = ['name', 'price', 'active', 'categorie_id'];
+    protected $fillable = ['name', 'price', 'description', 'active', 'categorie_id'];
     protected $appends = ["image"];
 
     public function categories()
