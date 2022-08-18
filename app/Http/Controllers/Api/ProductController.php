@@ -106,7 +106,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
         // try{
 
@@ -124,8 +124,9 @@ class ProductController extends Controller
         //     ],500);
         // }
         
-        $product = Product::findOrFail($id);
-        $product->update($request->all());
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->save();
     
         return $product;
     }
