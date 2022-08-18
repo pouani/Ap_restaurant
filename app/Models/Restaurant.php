@@ -9,4 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Restaurant extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = ['name', 'price', 'active', 'categorie_id'];
+    protected $appends = ["image"];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
