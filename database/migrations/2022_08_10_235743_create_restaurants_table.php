@@ -19,7 +19,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('adresse');
             $table->string('menu')->nullable();
             $table->string('image')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }

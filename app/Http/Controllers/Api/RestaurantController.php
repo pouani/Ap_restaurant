@@ -13,7 +13,7 @@ class RestaurantController extends Controller
     
     public function index()
     {
-        $restaurant = Restaurant::where('active', 1)->get();
+        $restaurant = Restaurant::all();
 
        return response()->json([
         'Categories' => $restaurant,
@@ -30,7 +30,7 @@ class RestaurantController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:300',
+                'name' => 'string',
             ]);
             
             if($validator->fails()){
