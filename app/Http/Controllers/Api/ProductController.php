@@ -72,7 +72,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $ex->getMessage(),
-            ], 500);
+            ],500);
         }
     }
 

@@ -43,7 +43,7 @@ Route::middleware('auth:api')->put('/restaurants/{restaurant}', [RestaurantContr
 //routes produits
 Route::get('/produits', [ProductController::class,'index']);
 Route::middleware('auth:api')->post('/produits', [ProductController::class,'store']);
-Route::middleware('auth:api')->delete('/produits', [ProductController::class,'destroy']);
+Route::middleware('auth:api')->delete('/produits/{id}', [ProductController::class,'destroy']);
 
 //routes carts
 Route::get('/carts', [CartController::class,'index']);
