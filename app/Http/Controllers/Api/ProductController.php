@@ -23,12 +23,12 @@ class ProductController extends Controller
             return response()->json([
                 'success' =>true,
                 'message' => $products
-            ], 200);
+            ],200);
         } catch (Exception $ex) {
             return response()->json([
                 'success' => false,
                 'message' => $ex->getMessage(),
-            ], 500);
+            ],500);
         }
     }
 
@@ -66,7 +66,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' =>true,
                 'message' => 'Nouveau produit ajouté!!!'
-            ], 200);
+            ],200);
 
         } catch (Exception $ex) {
             return response()->json([
@@ -90,12 +90,12 @@ class ProductController extends Controller
             return response()->json([
                 'success' =>true,
                 'message' => $product
-            ], 200);
+            ],200);
         } catch (Exception $ex) {
             return response()->json([
                 'success' => false,
                 'message' => $ex->getMessage(),
-            ], 500);
+            ],500);
         }
     }
 
@@ -108,7 +108,27 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        // try{
+
+        //     $product=Product::find($id);
+        //     $product->update($request->all());
+
+        //     return response()->json([
+        //         'success' => true,
+        //         'message' => $product
+        //     ]);
+        // }catch(Exception $e){
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => $e->getMessage(),
+        //     ],500);
+        // }
+        
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->save();
+    
+        return $product;
     }
 
     /**
@@ -124,12 +144,18 @@ class ProductController extends Controller
             return response()->json([
                 'success' =>true,
                 'message' => 'Produit Supprimé!!!'
-            ], 200);
+            ],200);
         } catch (Exception $ex) {
             return response()->json([
                 'success' => false,
                 'message' => $ex->getMessage(),
-            ], 500);
+            ],500);
         }
     }
+
+    // public function search($name)
+    // {
+    //     //
+    //     return Product::where('name','like','%'.$name.'%')->get();
+    // }
 }

@@ -44,6 +44,12 @@ Route::middleware('auth:api')->put('/restaurants/{restaurant}', [RestaurantContr
 Route::get('/produits', [ProductController::class,'index']);
 Route::middleware('auth:api')->post('/produits', [ProductController::class,'store']);
 Route::middleware('auth:api')->delete('/produits/{id}', [ProductController::class,'destroy']);
+<<<<<<< HEAD
+=======
+Route::get('/produits/{id}', [ProductController::class,'show']);
+Route::middleware('auth:api')->put('/produits/{product}', [ProductController::class,'update']);
+
+>>>>>>> 7cddae5d2a5fc8593180fdb6b6cc8d1449be0d78
 
 //routes carts
 Route::get('/carts', [CartController::class,'index']);

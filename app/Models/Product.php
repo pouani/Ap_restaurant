@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+use Illuminate\Support\Facades\Storage;
+
+
 class Product extends Model implements HasMedia
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
@@ -33,9 +36,15 @@ class Product extends Model implements HasMedia
         return $this->belongsToMany(Order::class)
             ->withPivot('total_quantity', 'total_price');
     }
+
     public function getImageAttribute(){
-        $image = $this->getFirstMedia('images');
-        $this->makeHidden('media');
-        return $image;
+        if ($this->getFirstMedia('images')) {
+            $arrayLinks = explode("public\\", $this->getFirstMedia('images')->getPath());
+            $link = Storage::url($arrayLinks[count($arrayLinks) - 1]);
+          } else {
+            return null;
+          }
+          $this->makeHidden('media');
+          return asset($link);
     }
 }
