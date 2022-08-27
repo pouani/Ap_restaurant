@@ -18,11 +18,11 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            $products = Product::get();
+            $products = Product::orderBy('created_at', 'DESC')->paginate(7);
 
             return response()->json([
                 'success' =>true,
-                'message' => $products
+                $products
             ],200);
         } catch (Exception $ex) {
             return response()->json([
@@ -60,7 +60,7 @@ class ProductController extends Controller
                 'categorie_id' => $request->categorie_id
             ]);
 
-            $product->addMedia($request->images)->toMediaCollection('images');
+            $product->addMedia($request->image)->toMediaCollection('images');
             $product = $product->fresh();
 
             return response()->json([
@@ -106,29 +106,29 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $id)
     {
-        // try{
+        try{
 
-        //     $product=Product::find($id);
-        //     $product->update($request->all());
+            $product=Product::find($id);
+            $product->update($request->all());
 
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => $product
-        //     ]);
-        // }catch(Exception $e){
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => $e->getMessage(),
-        //     ],500);
-        // }
+            return response()->json([
+                'success' => true,
+                'message' => $product
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ],500);
+        }
         
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->save();
+        // $product->name = $request->name;
+        // $product->description = $request->description;
+        // $product->save();
     
-        return $product;
+        // return $product;
     }
 
     /**
