@@ -20,10 +20,9 @@ class ProductController extends Controller
         try {
             $products = Product::all();
 
-            return response()->json([
-                'success' =>true,
+            return response()->json(
                 $products
-            ],200);
+            ,200);
         } catch (Exception $ex) {
             return response()->json([
                 'success' => false,
@@ -86,11 +85,9 @@ class ProductController extends Controller
     {
         try {
             $product = Product::find($id);
-
-            return response()->json([
-                'success' =>true,
+            return response()->json(
                 $product
-            ],200);
+            ,200);
         } catch (Exception $ex) {
             return response()->json([
                 'success' => false,
