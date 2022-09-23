@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            $products = Product::orderBy('created_at', 'DESC')->paginate(7);
+            $products = Product::all();
 
             return response()->json([
                 'success' =>true,
@@ -89,7 +89,7 @@ class ProductController extends Controller
 
             return response()->json([
                 'success' =>true,
-                'message' => $product
+                $product
             ],200);
         } catch (Exception $ex) {
             return response()->json([
