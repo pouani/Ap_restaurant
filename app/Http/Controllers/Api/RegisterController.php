@@ -61,7 +61,22 @@ class RegisterController extends Controller
 
     public function show($id){
         $user = User::find($id);
-        return response()->json(['User' => $user,]);
+        return response()->json([
+            'User' => $user,
+            'message' => 'User trouvé',
+        ]);
+    }
+
+    public function update($id, Request $request){
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->telephone = $request->telephone;
+        $user->save();
+        return response()->json([
+            'User' => $user,
+            'message' => 'User updated',
+        ]);
     }
 
     public function destroy($id){

@@ -24,7 +24,7 @@ Route::post('login', [RegisterController::class,'login'])->name('login');
 Route::get('users', [RegisterController::class,'index']);
 Route::middleware('auth:api')->get('/users/{id}', [RegisterController::class,'show']);
 Route::middleware('auth:api')->delete('/users/{id}', [RegisterController::class,'destroy']);
-
+Route::middleware('auth:api')->put('/users/{user}', [RegisterController::class,'update']);
 
 //routes categories
 Route::get('/categories', [CategorieController::class,'index']);
